@@ -1,8 +1,9 @@
 {
   "name": "web3-pos-backend",
-  "buildCommand": "npm install",
-  "startCommand": "npm start",
-  "install": "npm install",
-  "build": "echo 'No build needed'",
-  "nodeVersion": "20"
+  "buildCommand": "yarn install",
+  "startCommand": "yarn start",
+  "install": "yarn install",
+  "build": "",
+  "nodeVersion": "20",
+  "packageManager": "yarn"
 }
