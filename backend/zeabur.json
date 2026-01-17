@@ -1,3 +1,8 @@
 {
-  "name": "web3-pos-backend"
+  "name": "web3-pos-backend",
+  "buildCommand": "npm install",
+  "startCommand": "npm start",
+  "install": "npm install",
+  "build": "echo 'No build needed'",
+  "nodeVersion": "20"
 }
