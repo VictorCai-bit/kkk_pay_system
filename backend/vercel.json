@@ -1,0 +1,162 @@
+# 🚀 Vercel 部署指南
+
+本文档说明如何将 KKK POS 系统部署到 Vercel 平台。
+
+## 📋 部署架构
+
+### 推荐方案：混合部署
+
+```
+┌─────────────┐
+│   Vercel    │  ← 前端（3个项目）
+└──────┬──────┘
+       │
+       ↓
+┌─────────────┐
+│  Railway    │  ← 后端 + WebSocket + 区块链监听
+└─────────────┘
+```
+
+**为什么？**
+- ✅ Vercel 最适合静态前端
+- ✅ Railway/Render 支持持续运行的后端
+- ✅ 保留 WebSocket 和区块链监听功能
+
+## 🎯 方案 A：前端到 Vercel + 后端到 Railway（推荐）
+
+### 步骤 1：部署前端到 Vercel
+
+#### 1.1 安装 Vercel CLI
+
+```bash
+npm install -g vercel
+```
+
+#### 1.2 登录 Vercel
+
+```bash
+vercel login
+```
+
+#### 1.3 部署商家手机端
+
+```bash
+cd frontend/merchant-mobile
+
+# 生产环境配置
+cat > .env.production << 'EOF'
+VITE_API_URL=https://your-backend.up.railway.app/api
+VITE_SOCKET_URL=https://your-backend.up.railway.app
+EOF
+
+# 部署
+vercel --prod
+```
+
+#### 1.4 部署商家电脑端
+
+```bash
+cd frontend/merchant-desktop
+
+cat > .env.production << 'EOF'
+VITE_API_URL=https://your-backend.up.railway.app/api
+VITE_SOCKET_URL=https://your-backend.up.railway.app
+VITE_PAYMENT_URL=https://kkk-pos-payment.vercel.app
+EOF
+
+vercel --prod
+```
+
+#### 1.5 部署用户支付端
+
+```bash
+cd frontend/user-payment
+
+cat > .env.production << 'EOF'
+VITE_API_URL=https://your-backend.up.railway.app/api
+VITE_MONAD_RPC_URL=https://testnet-rpc.monad.xyz
+VITE_CONTRACT_ADDRESS=0xYourContractAddress
+VITE_WALLET_CONNECT_PROJECT_ID=1fba176f84da8ad01ca69caa0074f292
+EOF
+
+vercel --prod
+```
+
+### 步骤 2：部署后端到 Railway
+
+#### 2.1 创建 Railway 账号
+
+访问 https://railway.app/ 并注册
+
+#### 2.2 创建新项目
+
+1. 点击 "New Project"
+2. 选择 "Deploy from GitHub repo"
+3. 连接您的 GitHub 仓库
+
+#### 2.3 配置环境变量
+
+在 Railway 项目设置中添加：
+
+```env
+PORT=3000
+NODE_ENV=production
+JWT_SECRET=your_production_secret_key
+MONAD_RPC_URL=https://testnet-rpc.monad.xyz
+CONTRACT_ADDRESS=0xYourContractAddress
+MOBILE_URL=https://kkk-pos-mobile.vercel.app
+DESKTOP_URL=https://kkk-pos-desktop.vercel.app
+PAYMENT_URL=https://kkk-pos-payment.vercel.app
+```
+
+#### 2.4 添加数据库
+
+Railway 提供 PostgreSQL，但我们需要改造代码。
+
+**或者使用 MongoDB Atlas:**
+1. 访问 https://www.mongodb.com/cloud/atlas
+2. 创建免费集群
+3. 获取连接字符串
+4. 添加到 Railway 环境变量
+
+### 步骤 3：更新 CORS 配置
+
+确保后端允许 Vercel 域名访问（已配置为允许所有来源）。
+
+## 🔄 方案 B：完全部署到 Vercel（需要改造）
+
+如果您坚持全部用 Vercel，需要以下改造：
+
+### 改造清单
+
+1. **数据存储** → 使用 Vercel Postgres 或 MongoDB Atlas
+2. **WebSocket** → 改用轮询或放弃实时功能
+3. **区块链监听** → 使用 Vercel Cron Jobs
+4. **后端改造** → 改为 Serverless API
+
+### Vercel Serverless 后端配置
+
+<function_calls>
+<invoke name="write">
+<parameter name="contents">{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/index.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/index.js"
+    },
+    {
+      "src": "/health",
+      "dest": "src/index.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}

@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "merchant_id": 1,
+    "product_id": "P001",
+    "name": "可口可乐",
+    "cost_price": 0.005,
+    "sale_price": 0.01,
+    "description": "330ml 经典可乐",
+    "created_at": "2024-01-17T00:00:00.000Z",
+    "updated_at": "2024-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 2,
+    "merchant_id": 1,
+    "product_id": "P002",
+    "name": "百事可乐",
+    "cost_price": 0.005,
+    "sale_price": 0.01,
+    "description": "330ml",
+    "created_at": "2024-01-17T00:00:00.000Z",
+    "updated_at": "2024-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 3,
+    "merchant_id": 1,
+    "product_id": "P003",
+    "name": "农夫山泉",
+    "cost_price": 0.003,
+    "sale_price": 0.006,
+    "description": "550ml 矿泉水",
+    "created_at": "2024-01-17T00:00:00.000Z",
+    "updated_at": "2024-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 4,
+    "merchant_id": 1,
+    "product_id": "P004",
+    "name": "康师傅冰红茶",
+    "cost_price": 0.004,
+    "sale_price": 0.008,
+    "description": "500ml",
+    "created_at": "2024-01-17T00:00:00.000Z",
+    "updated_at": "2024-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 5,
+    "merchant_id": 1,
+    "product_id": "P005",
+    "name": "旺旺雪饼",
+    "cost_price": 0.005,
+    "sale_price": 0.01,
+    "description": "大包装",
+    "created_at": "2024-01-17T00:00:00.000Z",
+    "updated_at": "2024-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 6,
+    "merchant_id": 2,
+    "product_id": "K001",
+    "name": "可口可乐",
+    "cost_price": 0.005,
+    "sale_price": 0.01,
+    "description": "330ml 经典可乐",
+    "created_at": "2026-01-17T00:00:00.000Z",
+    "updated_at": "2026-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 7,
+    "merchant_id": 2,
+    "product_id": "K002",
+    "name": "百事可乐",
+    "cost_price": 0.005,
+    "sale_price": 0.01,
+    "description": "330ml",
+    "created_at": "2026-01-17T00:00:00.000Z",
+    "updated_at": "2026-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 8,
+    "merchant_id": 2,
+    "product_id": "K003",
+    "name": "农夫山泉",
+    "cost_price": 0.003,
+    "sale_price": 0.006,
+    "description": "550ml 矿泉水",
+    "created_at": "2026-01-17T00:00:00.000Z",
+    "updated_at": "2026-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 9,
+    "merchant_id": 2,
+    "product_id": "K004",
+    "name": "康师傅冰红茶",
+    "cost_price": 0.004,
+    "sale_price": 0.008,
+    "description": "500ml",
+    "created_at": "2026-01-17T00:00:00.000Z",
+    "updated_at": "2026-01-17T00:00:00.000Z"
+  },
+  {
+    "id": 10,
+    "merchant_id": 2,
+    "product_id": "K005",
+    "name": "旺旺雪饼",
+    "cost_price": 0.005,
+    "sale_price": 0.01,
+    "description": "大包装",
+    "created_at": "2026-01-17T00:00:00.000Z",
+    "updated_at": "2026-01-17T00:00:00.000Z"
+  }
+]
